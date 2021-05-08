@@ -46,6 +46,7 @@ export class NotesComponent implements OnInit {
     }
     if (mode === 'edit') {
       this.editNote = note;
+      this.setCheckbox(note.importanceFlag);
       button.setAttribute('data-target', '#updateNoteModal');
     }
     if (mode === 'delete') {
@@ -60,7 +61,6 @@ export class NotesComponent implements OnInit {
   public onAddNote(addForm: NgForm): void {
 
     this.closeModal();
-    // document.getElementById('cancel-button')?.click();
 
     this.notesService.addNote(addForm.value).subscribe(
       (response: Note) => {
@@ -83,6 +83,7 @@ export class NotesComponent implements OnInit {
       (response: Note) => {
         console.log(response);
         this.getNotes();
+
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -103,6 +104,14 @@ export class NotesComponent implements OnInit {
 
   private closeModal(): void {
     $(".modal").modal('hide');
+  }
+
+  private setCheckbox(importanceFlag: boolean): void {
+    if(importanceFlag === true) {
+      $('#importanceFlag').prop("checked", true);
+    } else {
+      $('#importanceFlag').prop("checked", false);
+    }
   }
 
 
