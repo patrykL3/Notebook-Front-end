@@ -16,11 +16,11 @@ export class NotesService {
 
 
   public getNotes(): Observable<Note[]> {
-    return this.http.get<Note[]>(`${this.apiServerUrl}/notes/all`);
+    return this.http.get<Note[]>(`${this.apiServerUrl}/notes`);
   }
 
   public addNote(note: Note): Observable<Note> {
-    return this.http.post<Note>(`${this.apiServerUrl}/notes/add`, note);
+    return this.http.post<Note>(`${this.apiServerUrl}/notes`, note);
   }
 
   public updateNote(note: Note): Observable<Note> {
@@ -28,7 +28,7 @@ export class NotesService {
   }
 
   public deleteNote(noteId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/notes/delete/${noteId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/notes/${noteId}`);
   }
 
 
